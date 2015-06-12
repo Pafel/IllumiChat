@@ -1,0 +1,3 @@
+3 mam klocki 1 2 2 1 3 4
+1 czerwony samolot 125 3
+0 Oczy węża

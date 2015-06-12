@@ -1,0 +1,2 @@
+2 mam klocki 1 2 3 4
+1 czerwony samolot 125 3

@@ -1,0 +1,5 @@
+1 Dzień dobry. 1 1
+1 Dobry wieczór. 2 2
+1 Jak się 3 2
+1 się masz? 4 1
+1 Bardzo dobrze. 0 1
