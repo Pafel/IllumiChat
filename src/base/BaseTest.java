@@ -50,8 +50,7 @@ public class BaseTest {
         for (int i = 0 ; i < 5 ; i++)
             System.out.println(base.randomIndex(0));
         
-        if (base.isEnd("Kupa.") == 0)
-            System.out.println("Zapis nowej bazy do pliku 'testout.txt'");
+        System.out.println("Zapis nowej bazy do pliku 'testout.txt'");
         
         base.saveToTheFile("testout.txt");
     }

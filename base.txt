@@ -1,5 +1,11 @@
 1 Dzień dobry. 1 1
-1 Dobry wieczór. 2 2
-1 Jak się 3 2
-1 się masz? 4 1
-1 Bardzo dobrze. 0 1
+2 Dobry wieczór. 2 4 9 1
+1 Jak się 3 4
+1 się masz? 4 2
+2 Bardzo dobrze, 5 1 7 1
+1 dobrze, a 6 1
+2 a ty? 0 1 1 1
+1 dobrze, lubię 8 1
+1 lubię ciasteczka. 0 2
+2 Jak sięmasz? 0 1 9 1
+0 Dzień dobry.

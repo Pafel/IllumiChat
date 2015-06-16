@@ -5,6 +5,7 @@
  */
 package gui;
 import base.*;
+import stat.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,14 +16,15 @@ import java.util.logging.Logger;
  *
  * @author Pafel
  */
-public class ChatWindow extends javax.swing.JFrame 
+public class IllumiChat extends javax.swing.JFrame 
 {
     Base base = new Base("base.txt");
+    Stat stat = new Stat();
     private int indexprev = -1;
     /**
      * Creates new form NewJFrame
      */
-    public ChatWindow() throws IOException {
+    public IllumiChat() throws IOException {
         initComponents();
     }
 
@@ -38,9 +40,10 @@ public class ChatWindow extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         chatOut = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        statArea = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         chatIn = new javax.swing.JTextField();
-        statButton = new javax.swing.JButton();
-        opButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IllumiChat");
@@ -61,11 +64,14 @@ public class ChatWindow extends javax.swing.JFrame
         chatOut.setName(""); // NOI18N
         jScrollPane1.setViewportView(chatOut);
 
-        chatIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chatInActionPerformed(evt);
-            }
-        });
+        statArea.setEditable(false);
+        statArea.setColumns(20);
+        statArea.setRows(5);
+        statArea.setFocusable(false);
+        jScrollPane2.setViewportView(statArea);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Statystyki");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,32 +79,28 @@ public class ChatWindow extends javax.swing.JFrame
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
-                    .addComponent(chatIn, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chatIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
-        statButton.setText("Statystyki");
-        statButton.addActionListener(new java.awt.event.ActionListener() {
+        chatIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statButtonActionPerformed(evt);
-            }
-        });
-
-        opButton.setText("Opcje");
-        opButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opButtonActionPerformed(evt);
+                chatInActionPerformed(evt);
             }
         });
 
@@ -109,20 +111,16 @@ public class ChatWindow extends javax.swing.JFrame
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(statButton, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(opButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(chatIn, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opButton)
-                    .addComponent(statButton))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(chatIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -135,11 +133,12 @@ public class ChatWindow extends javax.swing.JFrame
         try {
             base.saveToTheFile("base.txt");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ChatWindow.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IllumiChat.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowClosing
 
     private void chatInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatInActionPerformed
+        statArea.setText(" ");
         chatOut.append("Ty: " + chatIn.getText() + "\n");
         String word1 = null;
         String word2 = null;
@@ -151,6 +150,8 @@ public class ChatWindow extends javax.swing.JFrame
         for (String s : parts) {
             if (i == 0) {
                 word1 = s;
+                if (word1.length() == chatIn.getText().length())
+                    indexprev = base.addGram(indexprev, word1, "*");
                 i++;
             }
 
@@ -171,29 +172,31 @@ public class ChatWindow extends javax.swing.JFrame
         int r = base.randomIndex(indexprev);
         if (r != -1) {
             b.append(base.firstGramWord(r));
-            b.append(" ").append(base.lastGramWord(r));
-            while (isEnd(base.lastGramWord(r)) != 0) {
-                r = base.randomIndex(r);
+            stat.addToStat(base.firstGramWord(r) + " " + base.lastGramWord(r));
+            if (base.lastGramWord(r) != "*") {
+                
                 b.append(" ").append(base.lastGramWord(r));
+                
+                while (isEnd(base.lastGramWord(r)) != 0) {
+                    r = base.randomIndex(r);
+                    
+                    if (base.lastGramWord(r) != "*") {
+                        
+                        b.append(" ").append(base.lastGramWord(r));
+                        stat.addToStat(base.firstGramWord(r) + " " + base.lastGramWord(r));
+                    }
+                }
             }
             indexprev = r;
+            statArea.append(stat.statText().toString());
         }
 
         else
-        b.append("Teach me Senpai!!!");
+            b.append("Teach me Senpai!!!");
 
         chatOut.append("IllumiChan: " + b.toString() + "\n");
-
         chatIn.setText("");
     }//GEN-LAST:event_chatInActionPerformed
-
-    private void statButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statButtonActionPerformed
-
-    private void opButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_opButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,30 +217,32 @@ public class ChatWindow extends javax.swing.JFrame
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IllumiChat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IllumiChat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IllumiChat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChatWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IllumiChat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         int currentindex = 0;
         
         java.awt.EventQueue.invokeLater(() -> {
             try {
-                new ChatWindow().setVisible(true);
+                new IllumiChat().setVisible(true);
             } catch (IOException ex) {
-                Logger.getLogger(ChatWindow.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(IllumiChat.class.getName()).log(Level.SEVERE, null, ex);
             }
         }); 
     }
 
+    
     private static int isEnd(String word) {
         for (char c : word.toCharArray()) {
-            if (c == '.' || c == '?' || c == '!')
+            if (c == '.' || c == '?' || c == '!' || c == '*')
                 return 0;
         }
         return 1;
@@ -245,9 +250,10 @@ public class ChatWindow extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField chatIn;
     private javax.swing.JTextArea chatOut;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton opButton;
-    private javax.swing.JButton statButton;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea statArea;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,6 +76,7 @@ public class Base {
         return i;
     }
     
+    
     public void saveToTheFile(String filename) throws FileNotFoundException {
         try (PrintWriter save = new PrintWriter(filename)) {
             NGram g;
