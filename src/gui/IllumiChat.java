@@ -138,7 +138,7 @@ public class IllumiChat extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowClosing
 
     private void chatInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chatInActionPerformed
-        statArea.setText(" ");
+
         chatOut.append("Ty: " + chatIn.getText() + "\n");
         String word1 = null;
         String word2 = null;
@@ -188,6 +188,7 @@ public class IllumiChat extends javax.swing.JFrame
                 }
             }
             indexprev = r;
+            statArea.setText("");
             statArea.append(stat.statText().toString());
         }
 
